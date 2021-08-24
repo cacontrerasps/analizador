@@ -1,4 +1,4 @@
-# Analizador
+# Analizador :octopus:
 Repositorio que contiene el Examen Mercadolibre
 
 
@@ -13,7 +13,7 @@ spring.datasource.password=PASSWORD
 
 En el script.sql esta la  estructura de BD(MARIADB), necesaria para la aplicacion.
 
-una vez realizada las configuraciones necesarias, podemos acceder.
+Una vez realizada las configuraciones necesarias, podemos acceder :rocket:
 
 Para ejecutar la aplicacion acceder a la url: http://IP:PUERTO/mutant  por medio del metodo GET allí encontraras el listado de adn analizados
 
