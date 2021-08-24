@@ -32,4 +32,6 @@ En la url:  http://IP:PUERTO/mutant/ podras realizar una comprobacion de algun a
 
 Para conocer las estadisticas de los adns registrados, podemos acceder a la sig url http://IP:PUERTO/mutant/stats a traves del metodo GET
 
+:tada:
 
+Carlos A. Contreras R.
