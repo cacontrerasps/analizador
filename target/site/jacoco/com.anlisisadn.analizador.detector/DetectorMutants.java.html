@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DetectorMutants.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">analizador</a> &gt; <a href="index.source.html" class="el_package">com.anlisisadn.analizador.detector</a> &gt; <span class="el_source">DetectorMutants.java</span></div><h1>DetectorMutants.java</h1><pre class="source lang-java linenums">package com.anlisisadn.analizador.detector;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class DetectorMutants {
+    //Pattern secuenciaADN = Pattern.compile(&quot;.*CCCC.*|.*AAAA.*|.*GGGG.*|.*TTTT.*&quot;);
+<span class="fc" id="L8">    Pattern secuenciaADN = Pattern.compile(&quot;CCCC|AAAA|GGGG|TTTT&quot;);</span>
+<span class="fc" id="L9">    Pattern cadenaValida = Pattern.compile(&quot;[^aA|Cc|gG|tT]&quot;);</span>
+    Matcher matcher;
+<span class="fc" id="L11">    int cadenaADN = 0;</span>
+
+<span class="fc" id="L13">    public DetectorMutants() {</span>
+<span class="fc" id="L14">    }</span>
+
+    public boolean isMuntant(String[] dna) {
+        try {
+<span class="fc bfc" id="L18" title="All 2 branches covered.">            for (String adn : dna) {</span>
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">                if (cadenaValida.matcher(adn).find()) {</span>
+<span class="nc" id="L20">                    return false;</span>
+                }
+            }
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            if (searchRowsColumnsMainDiagonales(dna) &gt; 1) {</span>
+<span class="fc" id="L24">                return true;</span>
+            }
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if (diagonalesMatriz(dna) &gt; 1) {</span>
+<span class="nc" id="L27">                return true;</span>
+            }
+<span class="fc" id="L29">            return false;</span>
+<span class="nc" id="L30">        } catch (Exception e) {</span>
+<span class="nc" id="L31">            return false;</span>
+        }
+    }
+
+    public int searchRowsColumnsMainDiagonales(String[] dna) {
+<span class="fc" id="L36">        String diagonalPrincipal1 = &quot;&quot;, diagonalPrincipal2 = &quot;&quot;, columna = &quot;&quot;;</span>
+        int desde;
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (int i = 0; i &lt; dna.length; i++) {</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            if (cadenaADN &gt; 1) break;</span>
+<span class="fc" id="L40">            columna = &quot;&quot;;</span>
+<span class="fc" id="L41">            desde = 0;</span>
+<span class="fc" id="L42">            matcher = secuenciaADN.matcher(dna[i].toUpperCase());</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            while (matcher.find(desde)) {</span>
+<span class="fc" id="L44">                cadenaADN++;</span>
+<span class="fc" id="L45">                desde = matcher.start() + 1;</span>
+            }
+<span class="fc" id="L47">            int longitudColumna = dna[i].length();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            for (int j = 0; j &lt; longitudColumna; j++) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">                if (i == j) {</span>
+<span class="fc" id="L50">                    diagonalPrincipal1 += dna[i].charAt(j);</span>
+                }
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                if ((i + j) == (longitudColumna - 1)) {</span>
+<span class="fc" id="L53">                    diagonalPrincipal2 += dna[i].charAt(j);</span>
+                }
+<span class="fc" id="L55">                columna += dna[j].charAt(i);</span>
+            }
+<span class="fc" id="L57">            desde = 0;</span>
+<span class="fc" id="L58">            matcher = secuenciaADN.matcher(columna.toUpperCase());</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            while (matcher.find(desde)) {</span>
+<span class="fc" id="L60">                cadenaADN++;</span>
+<span class="fc" id="L61">                desde = matcher.start() + 1;</span>
+            }
+        }
+<span class="fc" id="L64">        desde = 0;</span>
+<span class="fc" id="L65">        matcher = secuenciaADN.matcher(diagonalPrincipal1.toUpperCase());</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        while (matcher.find(desde)) {</span>
+<span class="fc" id="L67">            cadenaADN++;</span>
+<span class="fc" id="L68">            desde = matcher.start() + 1;</span>
+        }
+<span class="fc" id="L70">        desde = 0;</span>
+<span class="fc" id="L71">        matcher = secuenciaADN.matcher(diagonalPrincipal2.toUpperCase());</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        while (matcher.find(desde)) {</span>
+<span class="nc" id="L73">            cadenaADN++;</span>
+<span class="nc" id="L74">            desde = matcher.start() + 1;</span>
+        }
+<span class="fc" id="L76">        return cadenaADN;</span>
+    }
+
+    public int diagonalesMatriz(String[] adn) {
+        //obtenemos ancho y alto de la matriz
+<span class="fc" id="L81">        int altura = adn.length, anchura = adn[0].length();</span>
+        //declaramos variables para llevar diagonales
+        String diagonalPrincipal, diagonalSecundaria;
+        //entero que me controla el eje y para las diagonales segundarias
+        int yeDiagonalSegundaria;
+        int desde;
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (int diagonal = 1 - anchura; diagonal &lt;= altura - 1; diagonal += 1) {</span>
+<span class="fc" id="L88">            diagonalPrincipal = &quot;&quot;;</span>
+<span class="fc" id="L89">            diagonalSecundaria = &quot;&quot;;</span>
+<span class="fc" id="L90">            desde = 0;</span>
+<span class="fc" id="L91">            for (int vertical = Math.max(0, diagonal), horizontal = -Math.min(0, diagonal);</span>
+<span class="fc bfc" id="L92" title="All 4 branches covered.">                 vertical &lt; altura &amp;&amp; horizontal &lt; anchura; vertical += 1, horizontal += 1) {</span>
+<span class="fc" id="L93">                yeDiagonalSegundaria = altura - 1 - vertical;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">                if (vertical != horizontal) {</span>
+<span class="fc" id="L95">                    diagonalPrincipal = diagonalPrincipal + adn[vertical].charAt(horizontal);</span>
+                }
+<span class="fc bfc" id="L97" title="All 2 branches covered.">                if (horizontal != yeDiagonalSegundaria) {</span>
+<span class="fc" id="L98">                    diagonalSecundaria = diagonalSecundaria + adn[horizontal].charAt(yeDiagonalSegundaria);</span>
+                }
+            }
+<span class="fc" id="L101">            matcher = secuenciaADN.matcher(diagonalPrincipal.toUpperCase());</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            while (matcher.find(desde)) {</span>
+<span class="nc" id="L103">                cadenaADN++;</span>
+<span class="nc" id="L104">                desde = matcher.start() + 1;</span>
+            }
+<span class="fc" id="L106">            desde = 0;</span>
+<span class="fc" id="L107">            matcher = secuenciaADN.matcher(diagonalSecundaria.toUpperCase());</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">            while (matcher.find(desde)) {</span>
+<span class="nc" id="L109">                cadenaADN++;</span>
+<span class="nc" id="L110">                desde = matcher.start() + 1;</span>
+            }
+        }
+<span class="fc" id="L113">        return cadenaADN;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

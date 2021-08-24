@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutanteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">analizador</a> &gt; <a href="index.source.html" class="el_package">com.anlisisadn.analizador.service</a> &gt; <span class="el_source">MutanteService.java</span></div><h1>MutanteService.java</h1><pre class="source lang-java linenums">package com.anlisisadn.analizador.service;
+
+import com.anlisisadn.analizador.model.Mutante;
+import com.anlisisadn.analizador.repository.MutanteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
+@Transactional
+<span class="fc" id="L15">public class MutanteService {</span>
+
+    @Autowired
+    private MutanteRepository mutanteRepository;
+
+    public List&lt;Mutante&gt; listAllMutante() {
+<span class="fc" id="L21">        return mutanteRepository.findAll();</span>
+    }
+
+    public void saveUser(Mutante mutante) {
+<span class="fc" id="L25">        if (mutanteRepository.findAll().stream().</span>
+<span class="fc" id="L26">                filter(a -&gt; a.getDna().equals(mutante.getDna())).</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">                findFirst().stream().count() == 0) {</span>
+<span class="nc" id="L28">            mutanteRepository.save(mutante);</span>
+        }
+<span class="fc" id="L30">    }</span>
+
+    public Map statsMutants() {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        double mutantes = mutanteRepository.findAll().stream().filter(a -&gt; (a.getEsMutante() == 1)).count();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        double noMutantes = mutanteRepository.findAll().stream().filter(a -&gt; (a.getEsMutante() == 0)).count();</span>
+<span class="fc" id="L35">        double averageMutante = (mutantes / noMutantes);</span>
+<span class="fc" id="L36">        Map&lt;String, Double&gt; stats = new HashMap&lt;String, Double&gt;();</span>
+<span class="fc" id="L37">        stats.put(&quot;count_mutant_dna&quot;, mutantes);</span>
+<span class="fc" id="L38">        stats.put(&quot;count_human_dna&quot;, noMutantes);</span>
+<span class="fc" id="L39">        stats.put(&quot;ratio&quot;, averageMutante);</span>
+<span class="fc" id="L40">        return stats;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.anlisisadn.analizador.AnalizadorApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 47.471 s - in com.anlisisadn.analizador.AnalizadorApplicationTests

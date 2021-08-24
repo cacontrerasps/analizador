@@ -1,0 +1,6 @@
+com\anlisisadn\analizador\model\Mutante.class
+com\anlisisadn\analizador\service\MutanteService.class
+com\anlisisadn\analizador\AnalizadorApplication.class
+com\anlisisadn\analizador\detector\DetectorMutants.class
+com\anlisisadn\analizador\controller\mutanteController.class
+com\anlisisadn\analizador\repository\MutanteRepository.class
