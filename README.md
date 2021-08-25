@@ -6,7 +6,7 @@ Para ejecutar la app, es necesario modificar los accesso a BD, se ultilizo MARIA
 
 application.properties
 
-Valores a modificar:
+Valores a modificar:</br>
 spring.datasource.url=URL_DE_ACCESO</br>
 spring.datasource.username=USUARIO_BD</br>
 spring.datasource.password=PASSWORD</br>
@@ -14,13 +14,16 @@ spring.datasource.password=PASSWORD</br>
 En el script.sql esta la  estructura de BD(MARIADB), necesaria para la aplicacion.
 
 # Acceder a la APP :rocket:
-Una vez realizada las configuraciones necesarias y desplegado el componente en el servidor (en el caso de que desees desplegar el jar), sino puedes ejecutarlo desde tu IDE de programación.
+Una vez realizada las configuraciones necesarias y desplegado el componente en el servidor (en el caso de que desees desplegar el jar), sino puedes ejecutarlo desde tu IDE de programación.</br>
+GET  http://IP:PUERTO/mutant</br>
+POST http://IP:PUERTO/mutant/</br>
+GET  http://IP:PUERTO/mutant/stats</br>
 
-Acceder
+Acceder a los endpoints en la nube
 
-Para ejecutar la aplicacion acceder a la url: http://IP:PUERTO/mutant  por medio del metodo GET allí encontraras el listado de adn analizados
+Para ejecutar la aplicacion acceder a la url: https://app-analizador.herokuapp.com/mutant  por medio del metodo GET allí encontraras el listado de adn analizados
 
-En la url:  http://IP:PUERTO/mutant/ podras realizar una comprobacion de algun adn, ejecutando el metodo POST y enviando un JSON con la siguiente estructura:
+En la url:  https://app-analizador.herokuapp.com/mutant/ podras realizar una comprobacion de algun adn, ejecutando el metodo POST y enviando un JSON con la siguiente estructura:
 
 {
     "dna": [
@@ -33,7 +36,7 @@ En la url:  http://IP:PUERTO/mutant/ podras realizar una comprobacion de algun a
     ]
 }
 
-Para conocer las estadisticas de los adns registrados, podemos acceder a la sig url http://IP:PUERTO/mutant/stats a traves del metodo GET
+Para conocer las estadisticas de los adns registrados, podemos acceder a la sig url https://app-analizador.herokuapp.com/mutant/stats a traves del metodo GET
 
 :tada:
 :end:
